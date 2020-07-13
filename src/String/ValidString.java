@@ -38,9 +38,9 @@ public class ValidString {
         Stack<Character> stack = new Stack<>();
         for (int i = 0; i < n; i++) {
             char c = s.charAt(i);
-            if (c == '[' || c == '{') {
+            if (map.containsKey(c)) {
                 stack.push(c);
-            } else if (c == ']' || c == '}'){
+            } else if (map.containsValue(c)){
                 Character top = stack.pop();
                 if (top != map.get(c)) {
                     return false;
