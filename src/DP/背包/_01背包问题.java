@@ -8,7 +8,9 @@ package DP.背包;
 public class _01背包问题 {
 
     public static void main(String[] args) {
+        // 重量
         int[] weigth = {0, 2, 3, 4, 5, 9};
+        // 价值
         int[] value = {0, 3, 4, 5, 8, 10};
         int N = 6;
         int W = 21;
@@ -25,24 +27,24 @@ public class _01背包问题 {
      * @return
      */
     public static int knapstack(int[] weight, int[] value, int N, int W) {
-        int[][] B = new int[N][W];
+        int[][] dp = new int[N][W];
         // k 表示的是第k件物品
         for (int k = 1; k < N; k++) {
             // c 表示的是背包的容量
             for (int c = 1; c < W; c++) {
                 // 当物品的体积大于背包剩下容量
                 if (weight[k] > c) {
-                    B[k][c] = B[k - 1][c];
+                    dp[k][c] = dp[k - 1][c];
                 } else {
                     // 偷第k件物品
-                    int value1 = B[k - 1][c - weight[k]] + value[k];
+                    int value1 = dp[k - 1][c - weight[k]] + value[k];
                     // 不偷第K件物品
-                    int value2 = B[k - 1][c];
-                    B[k][c] = Math.max(value1, value1);
+                    int value2 = dp[k - 1][c];
+                    dp[k][c] = Math.max(value1, value1);
                 }
             }
         }
-        return B[5][20];
+        return dp[5][20];
 
     }
 }

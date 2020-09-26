@@ -76,11 +76,4 @@ public class Leecode_003 {
         return result;
     }
 
-
-    public static void main(String[] args) {
-        String s = "abcabcbb";
-        int i = new Leecode_003().lengthOfLongestSubstring2(s);
-        System.out.println(i);
-    }
-
 }
