@@ -13,6 +13,7 @@ public class ArraySum {
         int opt2 = new ArraySum().dp_opt(arr);
         System.out.println(opt);
         System.out.println(opt2);
+        System.out.println(1);
     }
 
     public int rec_opt(int[] arr, int i) {
