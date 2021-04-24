@@ -14,6 +14,7 @@ public class _98_验证二叉搜索树 {
             return true;
         }
         boolean res = dfs(root, Long.MIN_VALUE, Long.MAX_VALUE);
+        System.out.println(res);
         return res;
     }
 
