@@ -1,44 +1,55 @@
 package 滑动窗口;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class 最小覆盖子串76 {
 
     //输入：s = "ADOBECODEBANC", t = "ABC"
     //输出："BANC"
     public String minWindow(String s, String t) {
-        HashMap<Character,Integer> need = new HashMap<>();
-        char[] charArray = t.toCharArray();
-        for (Character c:charArray) {
-            if (need.containsKey(c)){
-                need.put(c,need.get(c)+1);
-            }
-            need.put(c,1);
+        Map<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < t.length(); i++) {
+            map.put(t.charAt(i), map.getOrDefault(t.charAt(i), 0) + 1);
         }
-        int needCount = t.length();
-        // 滑动窗口
         int left = 0;
-        StringBuilder sb = new StringBuilder();
-        char[] chars = s.toCharArray();
-        for (int right = 0; right < chars.length; right++) {
-            char c = chars[right];
-            sb.append(c);
-            if(need.get(c) >0){
-                need.put(c,need.get(c)-1);
-                needCount = needCount -1;
-            }
-            while (needCount ==0){
-                Character leftChar = chars[left];
-                // 维护map中的元素，如果左边的不再维护的数组中直接的结束while
-                if(need.get(leftChar)==0)
-                    break;
-                // 否则left在目标的target中，此时的left需要不断的,需要维护need和neeCount
-                need.put(leftChar,need.get(leftChar)+1);
-                needCount++;
-            }
+        int count = 0;
+        int minLength = Integer.MAX_VALUE;
+        int minStart = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (map.containsKey(c)) {
+                // 后面出现的时候计数器是不会进去递增的aaooobc,第二次a的时候不应该递增
+                if (map.get(c) > 0) {
+                    count++;
+                }
+                map.put(c, map.get(c) - 1);
 
+            }
+            // 取
+            while (count == t.length()) {
+                if (i - left + 1 < minLength) {
+                    minLength = i - left + 1;
+                    minStart = left;
+                }
+                char c1 = s.charAt(left);
+                if (map.containsKey(c1)) {
+                    map.put(c1, map.get(c1) + 1);
+                    // 因为会出现map.get(c1)为负数的情况
+                    if (map.get(c1) > 0) {
+                        count--;
+                    }
+                }
+                left++;
+            }
         }
+        return s.substring(minStart, minStart + minLength);
+    }
 
+    public static void main(String[] args) {
+        String s ="ADOBECODEBANC", t = "ABC";
+        String s1 = new 最小覆盖子串76().minWindow(s, t);
+        System.out.println(s1);
 
     }
 }

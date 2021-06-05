@@ -49,7 +49,6 @@ public class 堆排序 {
             // 交换之后只需要重新heapify第0个元素
             heapify(tree, i, 0);
         }
-
     }
 
     public static void main(String[] args) {
