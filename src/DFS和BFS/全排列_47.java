@@ -17,11 +17,12 @@ public class 全排列_47 {
         if (temp.size() == nums.length){
             if (!result.contains(temp)){
                 result.add(new ArrayList<>(temp));
+                return;
             }
         }
 
         for (int i = 0; i < nums.length; i++) {
-            if (visited[i]){
+            if (visited[i] || (i > 0 && nums[i] == nums[i-1] && !visited[i-1])){
                 continue;
             }
             temp.add(nums[i]);
