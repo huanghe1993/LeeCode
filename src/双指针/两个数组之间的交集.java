@@ -52,8 +52,7 @@ public class 两个数组之间的交集 {
         for (int i = 0; i < ints.length; i++) {
             boolean status = true;
             for (HashSet<Integer> set : collects) {
-                if (!set.contains(ints[i])) {
-                    status = false;
+                if (!set.contains(ints[i])) { status = false;
                     break;
                 }
             }
